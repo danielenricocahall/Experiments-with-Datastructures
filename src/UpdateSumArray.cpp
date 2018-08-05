@@ -9,14 +9,14 @@
 
 //Note: bit implementation = unsigned char array, navigate into each byte
 //Original thought was booleans, but I think they're a byte each and we don't need that much
-UpdateSumArray::UpdateSumArray(unsigned int k)
+/*UpdateSumArray::UpdateSumArray(unsigned int k)
 {
 	this->k = k;
 }
 
-void UpdateSumArray::update(const unsigned int i, const unsigned int x)
+void UpdateSumArray::update(const unsigned int i, const T x)
 {
-	unsigned int temp = A.at(i);
+	T temp = A.at(i);
 	A[i] = x;
 	if(S.size() > i/k)
 	{
@@ -25,7 +25,7 @@ void UpdateSumArray::update(const unsigned int i, const unsigned int x)
 	}
 }
 
-void UpdateSumArray::add(const unsigned int x)
+void UpdateSumArray::add(const T x)
 {
 	unsigned int k_prev = k;
 	A.push_back(x);
@@ -78,13 +78,13 @@ void UpdateSumArray::computePartialSums(const unsigned int start)
 			s = 0;
 		}
 	}
-}
+}*/
 
 int main()
 {
-	UpdateSumArray * updater;
 	int N = 100;
-	updater = new UpdateSumArray(std::floor(sqrt(N)));
+
+	UpdateSumArray<int> * updater = new UpdateSumArray<int>(std::floor(sqrt(N)));
 	for(int ii = 0; ii<N; ++ii)
 	{
 		updater->add(ii);
