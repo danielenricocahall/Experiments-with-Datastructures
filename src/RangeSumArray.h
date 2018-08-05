@@ -1,9 +1,9 @@
 #include <vector>
 #include <cmath>
-template<class T> class UpdateSumArray
+template<class T> class RangeSumArray
 {
 public:
-	UpdateSumArray(unsigned int k)
+	RangeSumArray(unsigned int k)
 	{
 		this->k = k;
 	}
