@@ -1,11 +1,12 @@
 #include <vector>
 #include <cmath>
+#include <algorithm>
 template<class T> class RangeSumArray
 {
 public:
-	RangeSumArray(unsigned int k)
+	RangeSumArray()
 	{
-		this->k = k;
+
 	}
 	void update(const unsigned int i, const T x)
 	{
@@ -14,7 +15,7 @@ public:
 		if(S.size() > i/k)
 		{
 			S[std::floor(i/k)] -= temp;
-			S[std::floor(i/k)] += A.at(i);
+			S[std::floor(i/k)] += A[i];
 		}
 	}
 	unsigned int sum(const unsigned int lo, const unsigned int hi) const
@@ -23,15 +24,15 @@ public:
 		unsigned int ii = lo;
 		for(; (ii%k != 0 && ii != hi); ++ii)
 		{
-			acc+=A.at(ii);
+			acc+=A[ii];
 		}
 		for(; ii+k <= hi; ii+=k)
 		{
-			acc += S.at(ii/k);
+			acc += S[ii/k];
 		}
 		for(;ii<=hi;++ii)
 		{
-			acc += A.at(ii);
+			acc += A[ii];
 		}
 		return acc;
 
@@ -45,31 +46,29 @@ public:
 		if(k != k_prev)
 		{
 			S.clear();
-			computePartialSums(0);//recursive implementation
-			//recomputePartialSums(); original sequential implementation
+			computePartialSums(0);
 		}
 		else
 		{
 			if(A.size()%k == 0)
 			{
-					computePartialSums(A.size()-k);
+				computePartialSums(A.size()-k);
 			}
 		}
 	}
 	void computePartialSums(const unsigned int start)
 	{
 		unsigned int s = 0;
-		for(unsigned int ii = start; ii < A.size(); ++ii)
+		for(unsigned int ii = start, end = A.size(); ii < end; )
 		{
-			s+=A.at(ii);
-			if((ii+1)%k == 0)
+			s+=A[ii];
+			if((++ii)%k == 0)
 			{
 				S.push_back(s);
 				s = 0;
 			}
 		}
 	}
-	//void recomputePartialSums();
 
 private:
 	std::vector<T> A;
